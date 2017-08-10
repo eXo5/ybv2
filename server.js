@@ -58,14 +58,16 @@ if(process.env.NODE_ENV === 'production') {
 	app.get("/", (req, res) => {
 		res.sendFile(path.join(__dirname, '../build/'))
 	})
+} else {
+	app.use(express.static("build")); 
 }
 
 // Express app ROUTING??
 app.use("/auth", require("./src/utils/auth"))
 require("./src/utils/routes/router.js")(app, passport)
 
-//set the static build.
-app.use(express.static("build"));
+
+
 
 app.get("/", function(req,res){
 
